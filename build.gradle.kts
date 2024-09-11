@@ -1,12 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-//plugins {
-//	kotlin("jvm") version "1.9.25"
-//	kotlin("plugin.spring") version "1.9.25"
-//	id("org.springframework.boot") version "3.3.3"
-//	id("io.spring.dependency-management") version "1.1.6"
-//}
-
 plugins {
 	id("org.springframework.boot") version "2.7.17"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
@@ -17,19 +10,6 @@ plugins {
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
-
-repositories {
-	mavenCentral()
-}
-
-//group = "com.example"
-//version = "0.0.1-SNAPSHOT"
-//
-//java {
-//	toolchain {
-//		languageVersion = JavaLanguageVersion.of(17)
-//	}
-//}
 
 repositories {
 	mavenCentral()
@@ -69,13 +49,32 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+//plugins {
+//	kotlin("jvm") version "1.9.25"
+//	kotlin("plugin.spring") version "1.9.25"
+//	id("org.springframework.boot") version "3.3.3"
+//	id("io.spring.dependency-management") version "1.1.6"
+//}
+
+//group = "com.example"
+//version = "0.0.1-SNAPSHOT"
+//
+//java {
+//	toolchain {
+//		languageVersion = JavaLanguageVersion.of(17)
+//	}
+//}
+
+//repositories {
+//	mavenCentral()
+//}
 
 //kotlin {
 //	compilerOptions {
 //		freeCompilerArgs.addAll("-Xjsr305=strict")
 //	}
 //}
-//
+
 //tasks.withType<Test> {
 //	useJUnitPlatform()
 //}
