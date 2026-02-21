@@ -1,28 +1,31 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.7.17"
-	id("io.spring.dependency-management") version "1.0.15.RELEASE"
-	kotlin("jvm") version "1.6.21"
-	kotlin("plugin.spring") version "1.6.21"
+	id("org.springframework.boot") version "3.3.3"
+	id("io.spring.dependency-management") version "1.1.6"
+	kotlin("jvm") version "1.9.25"
+	kotlin("plugin.spring") version "1.9.25"
+	jacoco
 }
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
 
 repositories {
 	mavenCentral()
 }
 
-//dependencies {
-//	implementation("org.springframework.boot:spring-boot-starter-web")
-//	implementation("org.jetbrains.kotlin:kotlin-reflect")
-//	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-//	implementation("com.amazonaws:aws-java-sdk-sqs:1.12.200")
-//	implementation("org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE")
-//	testImplementation("org.springframework.boot:spring-boot-starter-test")
-//}
+kotlin {
+	compilerOptions {
+		freeCompilerArgs.addAll("-Xjsr305=strict")
+	}
+}
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -38,43 +41,36 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
-	}
-}
-
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-//plugins {
-//	kotlin("jvm") version "1.9.25"
-//	kotlin("plugin.spring") version "1.9.25"
-//	id("org.springframework.boot") version "3.3.3"
-//	id("io.spring.dependency-management") version "1.1.6"
-//}
+// JaCoCo Configuration
+jacoco {
+	toolVersion = "0.8.11"
+}
 
-//group = "com.example"
-//version = "0.0.1-SNAPSHOT"
-//
-//java {
-//	toolchain {
-//		languageVersion = JavaLanguageVersion.of(17)
-//	}
-//}
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
 
-//repositories {
-//	mavenCentral()
-//}
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+		csv.required.set(false)
+	}
 
-//kotlin {
-//	compilerOptions {
-//		freeCompilerArgs.addAll("-Xjsr305=strict")
-//	}
-//}
+	classDirectories.setFrom(files(classDirectories.files.map {
+		fileTree(it) {
+			exclude(
+				"**/config/**",
+				"**/entity/**",
+				"**/dto/**"
+			)
+		}
+	}))
+}
 
-//tasks.withType<Test> {
-//	useJUnitPlatform()
-//}
+// Generate JaCoCo report after tests
+tasks.test {
+	finalizedBy(tasks.jacocoTestReport)
+}
