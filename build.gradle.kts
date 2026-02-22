@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
 	id("org.springframework.boot") version "3.3.3"
 	id("io.spring.dependency-management") version "1.1.6"
@@ -30,6 +28,9 @@ kotlin {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	// Validation
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	// AWS SDK v2
 	implementation(platform("software.amazon.awssdk:bom:2.20.79"))
@@ -62,9 +63,7 @@ tasks.jacocoTestReport {
 	classDirectories.setFrom(files(classDirectories.files.map {
 		fileTree(it) {
 			exclude(
-				"**/config/**",
-				"**/entity/**",
-				"**/dto/**"
+				"**/SqsConsumerApplicationKt.class"
 			)
 		}
 	}))

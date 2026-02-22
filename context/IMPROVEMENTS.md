@@ -574,19 +574,19 @@ jacoco {
 
 ## Summary Checklist
 
-| Priority | Improvement | Effort |
-|----------|-------------|--------|
-| High | Replace println with logger | Low |
-| High | Externalize configuration | Low |
-| High | Add error handling | Medium |
-| High | Add unit tests | Medium |
-| Medium | Add message DTOs | Low |
-| Medium | Add integration tests | Medium |
-| Medium | Add health checks | Low |
-| Medium | Add DLQ configuration | Medium |
-| Low | Add circuit breaker | Medium |
-| Low | Add metrics | Medium |
-| Low | Improve project structure | Medium |
+| Priority | Improvement | Effort | Status |
+|----------|-------------|--------|--------|
+| High | Replace println with logger | Low | **Applied** |
+| High | Externalize configuration | Low | **Applied** |
+| High | Add error handling | Medium | **Applied** |
+| High | Add unit tests | Medium | Pending |
+| Medium | Add message DTOs | Low | **Applied** |
+| Medium | Add integration tests | Medium | Pending |
+| Medium | Add health checks | Low | Pending |
+| Medium | Add DLQ configuration | Medium | Pending |
+| Low | Add circuit breaker | Medium | Pending |
+| Low | Add metrics | Medium | Pending |
+| Low | Improve project structure | Medium | Pending |
 
 ---
 

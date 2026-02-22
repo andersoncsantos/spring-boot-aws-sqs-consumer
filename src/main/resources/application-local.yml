@@ -1,9 +1,15 @@
 spring:
-  profiles:
-    active: local
   application:
     name: sqs-consumer
+  cloud:
+    aws:
+      sqs:
+        endpoint: http://host.docker.internal:4566
+        region: us-east-1
+      credentials:
+        access-key: test
+        secret-key: test
 
 sqs:
   queue:
-    url: http://localhost:4566/000000000000/terraform-example-queue.fifo
+    url: http://host.docker.internal:4566/000000000000/terraform-example-queue.fifo

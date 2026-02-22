@@ -1,2 +1,22 @@
 server:
-  port: 8083
+  port: 8085
+
+sqs:
+  queue:
+    url: http://localhost:4566/000000000000/terraform-example-queue.fifo
+
+aws:
+  sqs:
+    endpoint: http://localhost:4566
+    queue-name: terraform-example-queue.fifo
+    region: us-east-1
+    credentials:
+      access-key: mock_access_key
+      secret-key: mock_secret_key
+
+spring:
+  cloud:
+    aws:
+      sqs:
+        listener:
+          acknowledgment-mode: MANUAL
